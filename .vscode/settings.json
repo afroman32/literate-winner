@@ -1,5 +1,4 @@
 {
-    "python.pythonPath": "/Users/rubyclaguna/anaconda3/envs/my-lambdata-env/bin/python",
     "python.testing.unittestArgs": [
         "-v",
         "-s",
