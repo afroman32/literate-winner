@@ -1,7 +1,6 @@
 from flask import Flask, Blueprint, jsonify, render_template, request
 from web_app.models.nlp_model import Predictor
-from web_app.model import parse_records, db
-from web_app.add import db_to_leafly, get_recommendations
+from web_app.model import parse_records, db, db_to_leafly, get_recommendations, UserData
 
 
 insert_routes = Blueprint("insert_routes", __name__)
@@ -24,9 +23,14 @@ def get_data():
 @insert_routes.route("/recommend", methods=["POST"])
 def display_data():
     # Select data from dictionary
-    user_data = request.form['Flavors/Effects']
-    print("RAW USER DATA TYPE:", type(user_data))
-    print("RAW USER DATA:", user_data)
+
+    data = request.get_json()
+    user_data = request_json.get('Flavors/Effects')
+    # value2           = request_json.get('Last_Name')
+
+    # user_data = request.form['Flavors/Effects']
+    # print("RAW USER DATA TYPE:", type(user_data))
+    # print("RAW USER DATA:", user_data)
 
     # Pass user_data into NLP model
     predictor = Predictor()

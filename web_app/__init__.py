@@ -7,7 +7,10 @@ from dotenv import load_dotenv
 load_dotenv()
 # from web_app.routes.json_routes import json_routes\
 
-DATABASE_URL = os.getenv("DB_URL")
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+# SQLALCHEMY_DATABASE_URI = 
+DATABASE_URL = 'sqlite:///' + os.path.join(basedir, 'site.db')
 
 def create_app():
     app = Flask(__name__)

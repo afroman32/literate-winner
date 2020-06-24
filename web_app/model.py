@@ -1,5 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+import pandas
+import os
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -13,16 +15,15 @@ class Strains(db.Model):
     flavor = db.Column(db.String(128))
     description = db.Column(db.String(128))
 
-class Recommendations(db.Model):
-    Recommendation_id = db.Column(db.Integer, primary_key=True)
-    User_id = db.Column(db.Integer)
-    strain_id = db.Column(db.Integer)
+# class Recommendations(db.Model):
+#     Recommendation_id = db.Column(db.Integer, primary_key=True)
+#     User_id = db.Column(db.Integer)
+#     strain_id = db.Column(db.Integer)
 
 class UserData(db.Model):
     User_id = db.Column(db.Integer, primary_key=True)
     User = db.Column(db.String(128))
-    Desired_Flavor = db.Column(db.String(128))
-    Desired_Effect = db.Column(db.String(128))
+    strain_id = db.Column(db.Integer)
     
     # def __repr__(self):
         # return jsonify(UserData)
@@ -49,3 +50,20 @@ def parse_records(database_records):
         del parsed_record["_sa_instance_state"]
         parsed_records.append(parsed_record)
     return parsed_records
+
+def db_to_leafly():
+    DB_FILEPATH = os.path.join(os.path.dirname(__file__), "cannabis.csv")
+    df = pandas.read_csv(DB_FILEPATH)
+    
+    strains = df.iloc[0]
+    return strains
+
+def get_recommendations(items):
+    DB_FILEPATH = os.path.join(os.path.dirname(__file__), "cannabis.csv")
+    df = pandas.read_csv(DB_FILEPATH)
+
+    strains = []
+    
+    for i in items:
+        strains.append(dict(df.iloc[int(i)]))
+    return strains
