@@ -21,7 +21,7 @@ def get_leafly():
 def get_data():
     return render_template('effects_flavors.html')
 
-@insert_routes.route("/print_data", methods=["POST"])
+@insert_routes.route("/recommend", methods=["POST"])
 def display_data():
     # Select data from dictionary
     user_data = request.form['Flavors/Effects']
@@ -37,7 +37,5 @@ def display_data():
 
     recommend = get_recommendations(results)
     print(type(recommend))
-    # breakpoint()
-    # breakpoint()
-    # return jsonify(parser(query_result))
+
     return jsonify(recommend)
