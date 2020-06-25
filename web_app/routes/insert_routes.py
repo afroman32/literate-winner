@@ -13,7 +13,7 @@ def insert_leafly():
 
 @insert_routes.route("/get_leafly")
 def get_leafly():
-
+    db_to_leafly()
     return jsonify(parser(query_result))
 
 @insert_routes.route("/user_data")

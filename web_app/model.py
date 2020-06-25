@@ -21,6 +21,9 @@ class UserData(db.Model):
     User = db.Column(db.String(128))
     strain_id = db.Column(db.Integer)
 
+DB_FILEPATH = os.path.join(os.path.dirname(__file__), "cannabis.csv")
+df = pandas.read_csv(DB_FILEPATH)
+df['Description'] = df['Description'].fillna('Desciption Unavailable')
 
 def parse_records(database_records):
     """
@@ -46,15 +49,14 @@ def parse_records(database_records):
     return parsed_records
 
 def db_to_leafly():
-    DB_FILEPATH = os.path.join(os.path.dirname(__file__), "cannabis.csv")
-    df = pandas.read_csv(DB_FILEPATH)
-    
+    # DB_FILEPATH = os.path.join(os.path.dirname(__file__), "cannabis.csv")
+    # df = pandas.read_csv(DB_FILEPATH)
     strains = df.iloc[0]
     return strains
 
 def get_recommendations(items):
-    DB_FILEPATH = os.path.join(os.path.dirname(__file__), "cannabis.csv")
-    df = pandas.read_csv(DB_FILEPATH)
+    # DB_FILEPATH = os.path.join(os.path.dirname(__file__), "cannabis.csv")
+    # df = pandas.read_csv(DB_FILEPATH)
 
     strains = []
     
