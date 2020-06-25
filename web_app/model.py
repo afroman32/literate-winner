@@ -15,18 +15,12 @@ class Strains(db.Model):
     flavor = db.Column(db.String(128))
     description = db.Column(db.String(128))
 
-# class Recommendations(db.Model):
-#     Recommendation_id = db.Column(db.Integer, primary_key=True)
-#     User_id = db.Column(db.Integer)
-#     strain_id = db.Column(db.Integer)
 
 class UserData(db.Model):
     User_id = db.Column(db.Integer, primary_key=True)
     User = db.Column(db.String(128))
     strain_id = db.Column(db.Integer)
-    
-    # def __repr__(self):
-        # return jsonify(UserData)
+
 
 def parse_records(database_records):
     """
@@ -67,3 +61,23 @@ def get_recommendations(items):
     for i in items:
         strains.append(dict(df.iloc[int(i)]))
     return strains
+
+def parser(list_of_db_records):
+    # list_of_db_records is a list of lists
+
+    parsed_records = []
+    for record in list_of_db_records:
+        new_record = {}
+        new_record['id'] = record[0]
+        new_record['Strain'] = record[1]
+        new_record['Type'] = record[2]
+        new_record['Rating'] = record[3]
+        new_record['Effects'] = record[4]
+        new_record['Flavor'] = record[5]
+        new_record['Description'] = record[6]
+
+        parsed_records.append(new_record)
+
+    pprint.pprint(parsed_records)
+
+    return parsed_records
