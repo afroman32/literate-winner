@@ -24,6 +24,7 @@ class UserData(db.Model):
 DB_FILEPATH = os.path.join(os.path.dirname(__file__), "cannabis.csv")
 df = pandas.read_csv(DB_FILEPATH)
 df['Description'] = df['Description'].fillna('Desciption Unavailable')
+df['Flavor'] = df['Flavor'].fillna('Flavor Unavailable')
 
 def parse_records(database_records):
     """
