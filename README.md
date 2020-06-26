@@ -11,6 +11,7 @@ pipenv install
 
 ##Usage##
 Receives form-data with key of FLAVORS/Effects that contains a string
+Send form-data to https://medcabinet-v2.herokuapp.com/recommend
 
 
 ##Authors##
